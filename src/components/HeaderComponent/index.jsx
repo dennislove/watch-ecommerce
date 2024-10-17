@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import HoverCart from '../Model';
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cartItems, setCartItems] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
+
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,15 +35,24 @@ const Navbar = () => {
     setSuggestions(dummySuggestions);
   };
 
+  const navigate = useNavigate();
+
   const toggleLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
+    if (isLoggedIn === true) {
+      navigate('/profile');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
-    <nav className="bg-gradient-to-r from-purple-500 to-indigo-600 p-4 shadow-lg">
-      <div className="container mx-auto w-full max-w-7xl">
+    <nav className="bg-gradient-to-r from-purple-500 to-indigo-600 p-4 shadow-lg ">
+      <div
+        className="container mx-auto w-full max-w-7xl relative"
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div
-          className={`flex ${
+          className={`flex  ${
             isMobile
               ? 'flex-col items-center'
               : 'flex-row items-center justify-between'
@@ -97,9 +109,8 @@ const Navbar = () => {
               onClick={toggleLogin}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              aria-label={isLoggedIn ? 'View profile' : 'Login'}
             >
-              <FaUser />
+              {isLoggedIn ? <FaUser /> : 'Sign In/Sign Up'}
             </motion.button>
 
             <motion.div
@@ -107,7 +118,12 @@ const Navbar = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <Link className="text-white" aria-label="View cart" to="/cart">
+              <Link
+                className="text-white"
+                aria-label="View cart"
+                to="/cart"
+                onMouseEnter={() => setIsHovered(true)}
+              >
                 <FaShoppingCart />
               </Link>
               {cartItems > 0 && (
@@ -118,6 +134,8 @@ const Navbar = () => {
             </motion.div>
           </div>
         </div>
+        {isHovered && <HoverCart />}
+        {/* <HoverCart /> */}
       </div>
     </nav>
   );

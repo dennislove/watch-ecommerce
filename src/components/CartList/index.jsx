@@ -117,8 +117,8 @@ const CartPage = () => {
   );
 
   return (
-    <div className="min-h-screen w-full max-w-7xl mx-auto container mt-10 py-8  ">
-      <div className="  bg-white rounded-lg shadow-md ">
+    <div className="min-h-screen w-full max-w-7xl mx-auto container ">
+      <div className="  bg-gray-200 rounded-lg shadow-md ">
         <div className="px-4 py-5 sm:p-6">
           <h1 className="text-2xl font-semibold text-gray-900 mb-6">
             Your Cart

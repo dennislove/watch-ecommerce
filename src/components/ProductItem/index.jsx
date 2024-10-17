@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FaMapMarkerAlt, FaDollarSign } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
+  // const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   // Fetch API từ backend
+  //   axios
+  //     .get('http://localhost:5000/api/data')
+  //     .then((response) => {
+  //       setProducts(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('There was an error fetching the data!', error);
+  //     });
+  // }, []);
+
   const products = [
     {
       id: 1,

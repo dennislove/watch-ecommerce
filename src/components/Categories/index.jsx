@@ -62,7 +62,7 @@ const CategorySlider = () => {
 
   return (
     <div
-      className="relative w-full max-w-7xl mx-auto mt-20 p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg shadow-lg"
+      className="relative w-full max-w-7xl mx-auto p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg shadow-lg"
       aria-label="Category Slider"
     >
       <div

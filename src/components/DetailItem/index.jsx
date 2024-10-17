@@ -1,7 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FaPlus, FaMinus, FaShoppingCart } from 'react-icons/fa';
 
 const ProductDetailPage = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Fetch API từ backend
+    axios
+      .get('http://localhost:5000/api/data')
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
+
   const [mainImage, setMainImage] = useState(
     'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
   );
@@ -27,7 +42,7 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <div className="container w-max max-w-7xl mx-auto px-4 py-8 mt-10">
+    <div className="container w-max max-w-7xl mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg transition-all duration-300 hover:shadow-xl">
@@ -128,9 +143,10 @@ const ProductDetailPage = () => {
           <div className="flex space-x-4">
             <button
               type="button"
-              className="flex-1 rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
+              className="flex-1 flex justify-around items-center rounded-md border border-transparent bg-indigo-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
             >
               Add to Cart
+              <FaShoppingCart />
             </button>
             <button
               type="button"
